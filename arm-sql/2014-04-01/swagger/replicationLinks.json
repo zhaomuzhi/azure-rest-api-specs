@@ -1,8 +1,8 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "Azure SQL Database replication links",
-    "description": "Provides read, delete, and failover functionality for Azure SQL Database replication links.",
+    "title": "Azure SQL Replication Link API spec",
+    "description": "Provides read and delete functionality for database replication links, as well as failover functionality.",
     "version": "2014-04-01"
   },
   "host": "management.azure.com",
@@ -22,10 +22,7 @@
           "DatabaseReplicationLinks"
         ],
         "operationId": "Databases_DeleteReplicationLink",
-        "description": "Deletes a database replication link. Cannot be done during failover.",
-        "x-ms-examples": {
-          "Delete a replication link": { "$ref": "../examples/ReplicationLinkDelete.json" }
-        },
+        "description": "Deletes the Azure SQL database replication link with the given ID. Cannot be done during failover.",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -44,7 +41,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the database that has the replication link to be dropped."
+            "description": "The name of the Azure SQL database that has the replication link to be dropped."
           },
           {
             "name": "linkId",
@@ -68,10 +65,7 @@
           "DatabaseReplicationLinks"
         ],
         "operationId": "Databases_GetReplicationLink",
-        "description": "Gets a database replication link.",
-        "x-ms-examples": {
-          "Get a replication link": { "$ref": "../examples/ReplicationLinkGet.json" }
-        },
+        "description": "Gets information about an Azure SQL database replication link.",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -90,7 +84,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the database to get the link for."
+            "description": "The name of the Azure SQL database to get the link for."
           },
           {
             "name": "linkId",
@@ -116,10 +110,7 @@
           "DatabaseReplicationLinks"
         ],
         "operationId": "Databases_FailoverReplicationLink",
-        "description": "Failover the database replication link.",
-        "x-ms-examples": {
-          "Failover a replication link": { "$ref": "../examples/ReplicationLinkFailover.json" }
-        },
+        "description": "Failover the Azure SQL database replication link with the given ID.",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -138,7 +129,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the database that has the replication link to be failed over."
+            "description": "The name of the Azure SQL database that has the replication link to be failed over."
           },
           {
             "name": "linkId",
@@ -165,7 +156,7 @@
           "DatabaseReplicationLinks"
         ],
         "operationId": "Databases_FailoverReplicationLinkAllowDataLoss",
-        "description": "Force failover the database replication link, which may result in data loss.",
+        "description": "Force failover the Azure SQL database replication link with the given ID which may result in data loss.",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -184,7 +175,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the database that has the replication link to be failed over."
+            "description": "The name of the Azure SQL database that has the replication link to be failed over."
           },
           {
             "name": "linkId",
@@ -211,10 +202,7 @@
           "DatabaseReplicationLinks"
         ],
         "operationId": "Databases_ListReplicationLinks",
-        "description": "Lists a database's replication links.",
-        "x-ms-examples": {
-          "List Replication links": { "$ref": "../examples/ReplicationLinkList.json" }
-        },
+        "description": "Gets information about Azure SQL database replication links.",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -233,7 +221,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the database to retrieve links for."
+            "description": "The name of the Azure SQL database to retrieve links for."
           }
         ],
         "responses": {
@@ -251,52 +239,27 @@
     }
   },
   "definitions": {
-    "SubResource": {
-      "description": "Subresource properties",
-      "properties": {
-        "name": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Resource name"
-        },
-        "id": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The resource ID."
-        }
-      }
-    },
     "ReplicationLinkProperties": {
       "properties": {
-        "isTerminationAllowed": {
-          "readOnly": true,
-          "type": "boolean",
-          "description": "Legacy value indicating whether termination is allowed.  Currently always returns true."
-        },
-        "replicationMode": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Replication mode of this replication link."
-        },
         "partnerServer": {
           "readOnly": true,
           "type": "string",
-          "description": "The name of the server hosting the partner database."
+          "description": "The name of the Azure SQL server hosting the partner Azure SQL Database."
         },
         "partnerDatabase": {
           "readOnly": true,
           "type": "string",
-          "description": "The name of the partner database."
+          "description": "The name of the partner Azure SQL Database."
         },
         "partnerLocation": {
           "readOnly": true,
           "type": "string",
-          "description": "The Azure Region of the partner database."
+          "description": "The Azure Region of the partner Azure SQL Database."
         },
         "role": {
           "readOnly": true,
           "type": "string",
-          "description": "The role of the database in the replication link.",
+          "description": "The role of the Azure SQL database in the replication link.",
           "enum": [
             "Primary",
             "Secondary",
@@ -311,7 +274,7 @@
         "partnerRole": {
           "readOnly": true,
           "type": "string",
-          "description": "The role of the partner database in the replication link.",
+          "description": "The role of the partner Azure SQL Database in the replication link.",
           "enum": [
             "Primary",
             "Secondary",
@@ -327,7 +290,7 @@
           "readOnly": true,
           "type": "string",
           "format": "date-time",
-          "description": "The start time for the replication link."
+          "description": "The start time for the replication link (ISO8601 format)."
         },
         "percentComplete": {
           "readOnly": true,
@@ -351,20 +314,10 @@
           }
         }
       },
-      "description": "Represents the properties of a database replication link."
+      "description": "Represents the properties of an Azure SQL database replication link."
     },
     "ReplicationLink": {
       "properties": {
-        "location": {
-          "type": "string",
-          "description": "Location of the server that contains this firewall rule.",
-          "readOnly": true
-        },
-        "type": {
-          "type": "string",
-          "description": "Type of resource this is.",
-          "readOnly": true
-        },
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/ReplicationLinkProperties",
@@ -373,10 +326,10 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/SubResource"
+          "$ref": "#/definitions/SqlSubResource"
         }
       ],
-      "description": "Represents a database replication link."
+      "description": "Represents an Azure SQL database replication link."
     },
     "ReplicationLinkListResult": {
       "properties": {
@@ -385,10 +338,25 @@
           "items": {
             "$ref": "#/definitions/ReplicationLink"
           },
-          "description": "The list of database replication links housed in the database."
+          "description": "The list of Azure SQL database replication links housed in the database."
         }
       },
-      "description": "Represents the response to a List database replication link request."
+      "description": "Represents the response to a List Azure SQL database replication link request."
+    },
+    "SqlSubResource": {
+      "description": "Subresource properties",
+      "properties": {
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource name"
+        },
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The resource ID."
+        }
+      }
     }
   },
   "parameters": {
@@ -419,7 +387,7 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "The name of the server.",
+      "description": "The name of the Azure SQL server.",
       "x-ms-parameter-location": "method"
     }
   }
