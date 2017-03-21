@@ -12,10 +12,9 @@
             "name": "skype",
             "type": "Microsofot.Network/bgpServiceCommunities",
             "properties": {
-              "serviceName" : "skype",
-              "bgpCommunities": [
+              "communities": [
                 {
-                  "serviceSupportedRegion": "Global",
+                  "region": "Global",
                   "communityName": "Skype For Business Online",
                   "communityValue": "12076:5030",
                   "communityPrefixes": [
@@ -31,10 +30,9 @@
             "name": "exchange",
             "type": "Microsofot.Network/bgpServiceCommunities",
             "properties": {
-              "serviceName" : "exchange",
-              "bgpCommunities": [
+              "communities": [
                 {
-                  "serviceSupportedRegion": "Global",
+                  "region": "Global",
                   "communityName": "Exchange Online",
                   "communityValue": "12076:5040",
                   "communityPrefixes": [

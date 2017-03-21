@@ -1052,7 +1052,8 @@
       },
       "required": [
         "ipConfigurations",
-        "gatewayType"
+        "gatewayType",
+        "vpnType"
       ],
       "description": "VirtualNetworkGateway properties"
     },

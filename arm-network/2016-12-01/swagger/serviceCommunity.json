@@ -69,7 +69,7 @@
   "definitions": {
     "BGPCommunity": {
       "properties": {
-        "serviceSupportedRegion": {
+        "region": {
           "type": "string",
             "description": "The region which the service support. e.g. For O365, region is Global."
         },
@@ -93,11 +93,7 @@
     },
     "BgpServiceCommunityPropertiesFormat": {
       "properties": {
-        "serviceName": {
-          "type": "string",
-          "description": "The name of the bgp community. e.g. Skype."
-        },
-        "bgpCommunities": {
+        "communities": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/BGPCommunity"
