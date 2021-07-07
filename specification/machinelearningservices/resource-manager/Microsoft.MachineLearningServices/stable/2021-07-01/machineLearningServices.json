@@ -2115,7 +2115,7 @@
         },
         "publicNetworkAccess": {
           "type": "string",
-          "description": "Whether requests from Public Network are allowed",
+          "description": "Whether requests from Public Network are allowed.",
           "enum": [
             "Enabled",
             "Disabled"
